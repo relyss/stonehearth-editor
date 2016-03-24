@@ -44,11 +44,18 @@ namespace StonehearthEditor
          this.changeModDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.netWorthVisualizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.effectsEditorTab = new System.Windows.Forms.TabPage();
+         this.effectsSplitContainer = new System.Windows.Forms.SplitContainer();
+         this.effectsEditorListView = new System.Windows.Forms.ListView();
          this.tabControl.SuspendLayout();
          this.manifestTab.SuspendLayout();
          this.encounterTab.SuspendLayout();
          this.entityBrowserTab.SuspendLayout();
          this.mainFormMenu.SuspendLayout();
+         this.effectsEditorTab.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.effectsSplitContainer)).BeginInit();
+         this.effectsSplitContainer.Panel1.SuspendLayout();
+         this.effectsSplitContainer.SuspendLayout();
          this.SuspendLayout();
          // 
          // tabControl
@@ -56,6 +63,7 @@ namespace StonehearthEditor
          this.tabControl.Controls.Add(this.manifestTab);
          this.tabControl.Controls.Add(this.encounterTab);
          this.tabControl.Controls.Add(this.entityBrowserTab);
+         this.tabControl.Controls.Add(this.effectsEditorTab);
          this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
          this.tabControl.Location = new System.Drawing.Point(0, 24);
          this.tabControl.Name = "tabControl";
@@ -191,6 +199,39 @@ namespace StonehearthEditor
          this.netWorthVisualizerToolStripMenuItem.Text = "Net Worth Visualizer";
          this.netWorthVisualizerToolStripMenuItem.Click += new System.EventHandler(this.netWorthVisualizerToolStripMenuItem_Click);
          // 
+         // effectsEditorTab
+         // 
+         this.effectsEditorTab.Controls.Add(this.effectsSplitContainer);
+         this.effectsEditorTab.Location = new System.Drawing.Point(4, 22);
+         this.effectsEditorTab.Name = "effectsEditorTab";
+         this.effectsEditorTab.Padding = new System.Windows.Forms.Padding(3);
+         this.effectsEditorTab.Size = new System.Drawing.Size(1115, 555);
+         this.effectsEditorTab.TabIndex = 3;
+         this.effectsEditorTab.Text = "Effects Editor";
+         this.effectsEditorTab.UseVisualStyleBackColor = true;
+         // 
+         // effectsSplitContainer
+         // 
+         this.effectsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.effectsSplitContainer.Location = new System.Drawing.Point(3, 3);
+         this.effectsSplitContainer.Name = "effectsSplitContainer";
+         // 
+         // effectsSplitContainer.Panel1
+         // 
+         this.effectsSplitContainer.Panel1.Controls.Add(this.effectsEditorListView);
+         this.effectsSplitContainer.Size = new System.Drawing.Size(1109, 549);
+         this.effectsSplitContainer.SplitterDistance = 369;
+         this.effectsSplitContainer.TabIndex = 0;
+         // 
+         // effectsEditorListView
+         // 
+         this.effectsEditorListView.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.effectsEditorListView.Location = new System.Drawing.Point(0, 0);
+         this.effectsEditorListView.Name = "effectsEditorListView";
+         this.effectsEditorListView.Size = new System.Drawing.Size(369, 549);
+         this.effectsEditorListView.TabIndex = 0;
+         this.effectsEditorListView.UseCompatibleStateImageBehavior = false;
+         // 
          // MainForm
          // 
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -212,6 +253,10 @@ namespace StonehearthEditor
          this.entityBrowserTab.ResumeLayout(false);
          this.mainFormMenu.ResumeLayout(false);
          this.mainFormMenu.PerformLayout();
+         this.effectsEditorTab.ResumeLayout(false);
+         this.effectsSplitContainer.Panel1.ResumeLayout(false);
+         ((System.ComponentModel.ISupportInitialize)(this.effectsSplitContainer)).EndInit();
+         this.effectsSplitContainer.ResumeLayout(false);
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -234,5 +279,8 @@ namespace StonehearthEditor
       private System.Windows.Forms.TabPage entityBrowserTab;
       private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem netWorthVisualizerToolStripMenuItem;
+      private System.Windows.Forms.TabPage effectsEditorTab;
+      private System.Windows.Forms.SplitContainer effectsSplitContainer;
+      private System.Windows.Forms.ListView effectsEditorListView;
    }
 }
