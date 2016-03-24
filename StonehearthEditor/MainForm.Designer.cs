@@ -35,6 +35,7 @@ namespace StonehearthEditor
          this.encounterDesignerView = new StonehearthEditor.EncounterDesignerView();
          this.entityBrowserTab = new System.Windows.Forms.TabPage();
          this.entityBrowserView = new StonehearthEditor.EntityBrowserView();
+         this.effectsEditorTab = new System.Windows.Forms.TabPage();
          this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.modsFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
          this.mainFormMenu = new System.Windows.Forms.MenuStrip();
@@ -44,18 +45,13 @@ namespace StonehearthEditor
          this.changeModDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.netWorthVisualizerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.effectsEditorTab = new System.Windows.Forms.TabPage();
-         this.effectsSplitContainer = new System.Windows.Forms.SplitContainer();
-         this.effectsEditorListView = new System.Windows.Forms.ListView();
+         this.effectsEditorView = new StonehearthEditor.EffectsEditorView();
          this.tabControl.SuspendLayout();
          this.manifestTab.SuspendLayout();
          this.encounterTab.SuspendLayout();
          this.entityBrowserTab.SuspendLayout();
-         this.mainFormMenu.SuspendLayout();
          this.effectsEditorTab.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.effectsSplitContainer)).BeginInit();
-         this.effectsSplitContainer.Panel1.SuspendLayout();
-         this.effectsSplitContainer.SuspendLayout();
+         this.mainFormMenu.SuspendLayout();
          this.SuspendLayout();
          // 
          // tabControl
@@ -129,6 +125,17 @@ namespace StonehearthEditor
          this.entityBrowserView.Size = new System.Drawing.Size(1109, 549);
          this.entityBrowserView.TabIndex = 0;
          // 
+         // effectsEditorTab
+         // 
+         this.effectsEditorTab.Controls.Add(this.effectsEditorView);
+         this.effectsEditorTab.Location = new System.Drawing.Point(4, 22);
+         this.effectsEditorTab.Name = "effectsEditorTab";
+         this.effectsEditorTab.Padding = new System.Windows.Forms.Padding(3);
+         this.effectsEditorTab.Size = new System.Drawing.Size(1115, 555);
+         this.effectsEditorTab.TabIndex = 3;
+         this.effectsEditorTab.Text = "Effects Editor";
+         this.effectsEditorTab.UseVisualStyleBackColor = true;
+         // 
          // saveToolStripMenuItem
          // 
          this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
@@ -199,38 +206,13 @@ namespace StonehearthEditor
          this.netWorthVisualizerToolStripMenuItem.Text = "Net Worth Visualizer";
          this.netWorthVisualizerToolStripMenuItem.Click += new System.EventHandler(this.netWorthVisualizerToolStripMenuItem_Click);
          // 
-         // effectsEditorTab
+         // effectsEditorView
          // 
-         this.effectsEditorTab.Controls.Add(this.effectsSplitContainer);
-         this.effectsEditorTab.Location = new System.Drawing.Point(4, 22);
-         this.effectsEditorTab.Name = "effectsEditorTab";
-         this.effectsEditorTab.Padding = new System.Windows.Forms.Padding(3);
-         this.effectsEditorTab.Size = new System.Drawing.Size(1115, 555);
-         this.effectsEditorTab.TabIndex = 3;
-         this.effectsEditorTab.Text = "Effects Editor";
-         this.effectsEditorTab.UseVisualStyleBackColor = true;
-         // 
-         // effectsSplitContainer
-         // 
-         this.effectsSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.effectsSplitContainer.Location = new System.Drawing.Point(3, 3);
-         this.effectsSplitContainer.Name = "effectsSplitContainer";
-         // 
-         // effectsSplitContainer.Panel1
-         // 
-         this.effectsSplitContainer.Panel1.Controls.Add(this.effectsEditorListView);
-         this.effectsSplitContainer.Size = new System.Drawing.Size(1109, 549);
-         this.effectsSplitContainer.SplitterDistance = 369;
-         this.effectsSplitContainer.TabIndex = 0;
-         // 
-         // effectsEditorListView
-         // 
-         this.effectsEditorListView.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.effectsEditorListView.Location = new System.Drawing.Point(0, 0);
-         this.effectsEditorListView.Name = "effectsEditorListView";
-         this.effectsEditorListView.Size = new System.Drawing.Size(369, 549);
-         this.effectsEditorListView.TabIndex = 0;
-         this.effectsEditorListView.UseCompatibleStateImageBehavior = false;
+         this.effectsEditorView.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.effectsEditorView.Location = new System.Drawing.Point(3, 3);
+         this.effectsEditorView.Name = "effectsEditorView";
+         this.effectsEditorView.Size = new System.Drawing.Size(1109, 549);
+         this.effectsEditorView.TabIndex = 0;
          // 
          // MainForm
          // 
@@ -251,12 +233,9 @@ namespace StonehearthEditor
          this.manifestTab.ResumeLayout(false);
          this.encounterTab.ResumeLayout(false);
          this.entityBrowserTab.ResumeLayout(false);
+         this.effectsEditorTab.ResumeLayout(false);
          this.mainFormMenu.ResumeLayout(false);
          this.mainFormMenu.PerformLayout();
-         this.effectsEditorTab.ResumeLayout(false);
-         this.effectsSplitContainer.Panel1.ResumeLayout(false);
-         ((System.ComponentModel.ISupportInitialize)(this.effectsSplitContainer)).EndInit();
-         this.effectsSplitContainer.ResumeLayout(false);
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -280,7 +259,6 @@ namespace StonehearthEditor
       private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem netWorthVisualizerToolStripMenuItem;
       private System.Windows.Forms.TabPage effectsEditorTab;
-      private System.Windows.Forms.SplitContainer effectsSplitContainer;
-      private System.Windows.Forms.ListView effectsEditorListView;
+      private EffectsEditorView effectsEditorView;
    }
 }
