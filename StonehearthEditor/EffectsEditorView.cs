@@ -19,6 +19,14 @@ namespace StonehearthEditor
 
       public void Initialize()
       {
+         effectsEditorListView.View = View.Details;
+         effectsEditorListView.GridLines = true;
+         effectsEditorListView.FullRowSelect = true;
+         effectsEditorListView.ShowItemToolTips = true;
+
+         new ModuleDataManager(MainForm.kModsDirectoryPath);
+         ModuleDataManager.GetInstance().Load();
+         ModuleDataManager.GetInstance().LoadEffectsList(effectsEditorListView);
       }
 
       private void effectsOpenFileButton_Click(object sender, EventArgs e)
