@@ -87,7 +87,7 @@
             this.removeFromManifestToolStripMenuItem,
             this.addNewAliasToolStripMenuItem});
          this.aliasContextMenu.Name = "aliasContextMenu";
-         this.aliasContextMenu.Size = new System.Drawing.Size(198, 158);
+         this.aliasContextMenu.Size = new System.Drawing.Size(198, 180);
          this.aliasContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.aliasContextMenu_Opening);
          // 
          // aliasContextDuplicate

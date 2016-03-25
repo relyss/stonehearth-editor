@@ -75,7 +75,16 @@ namespace StonehearthEditor
       private void LoadFilePreview(string filePath)
       {
          filePreviewTabs.TabPages.Clear();
+         FileData[] fileData = GetFileDataFromPath(filePath);
 
+         foreach (FileData openedFile in fileData)
+         {
+            FillFilePreview(openedFile);
+         }
+      }
+
+      private FileData[] GetFileDataFromPath(string filePath)
+      {
          FileData[] fileData = {};
          mFileDataMap.TryGetValue(filePath, out fileData);
          if (fileData == null)
@@ -88,16 +97,7 @@ namespace StonehearthEditor
                mFileDataMap[filePath] = fileData;
             }
          }
-
-         foreach (FileData openedFile in fileData)
-         {
-            FillFilePreview(openedFile);
-         }
-      }
-
-      private void effectsEditorTreeView_MouseClick(object sender, MouseEventArgs e)
-      {
-         effectsEditorTreeView.SelectedNode = effectsEditorTreeView.GetNodeAt(e.X, e.Y);
+         return fileData;
       }
 
       private void effectsEditorTreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -115,9 +115,24 @@ namespace StonehearthEditor
          effectsEditorTreeView.Focus();
       }
 
+      private void effectsEditorTreeView_MouseClick(object sender, MouseEventArgs e)
+      {
+         effectsEditorTreeView.SelectedNode = effectsEditorTreeView.GetNodeAt(e.X, e.Y);
+         CheckShowContextMenu(effectsEditorTreeView, e);
+      }
+
       private void cubemittersTreeView_MouseClick(object sender, MouseEventArgs e)
       {
          cubemittersTreeView.SelectedNode = cubemittersTreeView.GetNodeAt(e.X, e.Y);
+         CheckShowContextMenu(cubemittersTreeView, e);
+      }
+
+      private void CheckShowContextMenu(TreeView treeView, MouseEventArgs e)
+      {
+         if (e.Button == MouseButtons.Right)
+         {
+            effectsEditorContextMenuStrip.Show(treeView, new Point(e.X, e.Y));
+         }
       }
 
       private void cubemittersTreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -133,6 +148,106 @@ namespace StonehearthEditor
             filePreviewTabs.TabPages.Clear();
          }
          cubemittersTreeView.Focus();
+      }
+
+      private TreeView GetTreeView(int index)
+      {
+         if (index == 0)
+         {
+            return cubemittersTreeView;
+         }
+         return effectsEditorTreeView;
+      }
+
+      private void cloneToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         TreeView treeView = GetTreeView(treeViewTabControl.SelectedIndex);
+         TreeNode selectedNode = treeView.SelectedNode;
+         string filePath = selectedNode.Tag != null ? selectedNode.Tag.ToString() : null;
+
+         FileData selectedFileData = GetFileDataFromPath(filePath).First<FileData>();
+         CloneEffectFileCallback callback = new CloneEffectFileCallback(this, selectedFileData);
+         CloneDialog dialog = new CloneDialog(selectedFileData.FileName, selectedFileData.GetNameForCloning());
+         dialog.SetCallback(callback);
+         dialog.ShowDialog();
+      }
+
+      private class CloneEffectFileCallback : CloneDialog.IDialogCallback
+      {
+         private FileData mFileData;
+         private EffectsEditorView mViewer;
+         private PreviewCloneFileCallback mPreviewCallback;
+         public CloneEffectFileCallback(EffectsEditorView viewer, FileData file)
+         {
+            mViewer = viewer;
+            mFileData = file;
+         }
+         public void onCancelled()
+         {
+            // Do nothing. user cancelled
+         }
+
+         public bool OnAccept(CloneObjectParameters parameters)
+         {
+            // Do the cloning
+            string originalName = mFileData.GetNameForCloning();
+            string potentialNewNodeName = parameters.TransformParameter(originalName);
+            if (potentialNewNodeName.Length <= 1)
+            {
+               MessageBox.Show("You must enter a name longer than 1 character for the clone!");
+               return false;
+            }
+            if (potentialNewNodeName.Equals(originalName))
+            {
+               MessageBox.Show("You must enter a new unique name for the clone!");
+               return false;
+            }
+            HashSet<string> dependencies = ModuleDataManager.GetInstance().PreviewCloneDependencies(mFileData, parameters);
+            HashSet<string> savedUnwantedItems = mPreviewCallback != null ? mPreviewCallback.SavedUnwantedItems : null;
+            mPreviewCallback = new PreviewCloneFileCallback(mViewer, mFileData, parameters);
+            mPreviewCallback.SavedUnwantedItems = savedUnwantedItems;
+            PreviewCloneDialog dialog = new PreviewCloneDialog("Creating " + potentialNewNodeName, dependencies, mPreviewCallback);
+            DialogResult result = dialog.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+               return false;
+            }
+            return true;
+         }
+      }
+
+      private class PreviewCloneFileCallback : PreviewCloneDialog.IDialogCallback
+      {
+         private FileData mFileData;
+         private EffectsEditorView mViewer;
+         private CloneObjectParameters mParameters;
+         public HashSet<string> SavedUnwantedItems;
+         public PreviewCloneFileCallback(EffectsEditorView viewer, FileData fileData, CloneObjectParameters parameters)
+         {
+            mViewer = viewer;
+            mFileData = fileData;
+            mParameters = parameters;
+         }
+
+         public void onCancelled(HashSet<string> unwantedItems)
+         {
+            // Do nothing. user cancelled
+            SavedUnwantedItems = unwantedItems;
+         }
+
+         public bool OnAccept(HashSet<string> unwantedItems)
+         {
+            if (ModuleDataManager.GetInstance().ExecuteClone(mFileData, mParameters, unwantedItems))
+            {
+               mViewer.Reload();
+            }
+            return true;
+         }
+
+         public HashSet<string> GetSavedUnwantedItems()
+         {
+            return SavedUnwantedItems;
+         }
       }
    }
 }
