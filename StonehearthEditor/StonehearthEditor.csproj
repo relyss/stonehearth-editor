@@ -171,11 +171,29 @@
       <DependentUpon>FilePreview.cs</DependentUpon>
     </Compile>
     <Compile Include="QubicleFileData.cs" />
+    <Compile Include="subViews\CubemitterInputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="subViews\CubemitterInputView.Designer.cs">
+      <DependentUpon>CubemitterInputView.cs</DependentUpon>
+    </Compile>
     <Compile Include="subViews\EffectInputView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="subViews\EffectInputView.Designer.cs">
       <DependentUpon>EffectInputView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="subViews\NameValueInputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="subViews\NameValueInputView.Designer.cs">
+      <DependentUpon>NameValueInputView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="subViews\vec2InputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="subViews\vec2InputView.Designer.cs">
+      <DependentUpon>vec2InputView.cs</DependentUpon>
     </Compile>
     <Compile Include="ThumbnailCache.cs" />
     <EmbeddedResource Include="AliasSelectionDialog.resx">
@@ -228,8 +246,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="subViews\CubemitterInputView.resx">
+      <DependentUpon>CubemitterInputView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="subViews\EffectInputView.resx">
       <DependentUpon>EffectInputView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="subViews\NameValueInputView.resx">
+      <DependentUpon>NameValueInputView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="subViews\vec2InputView.resx">
+      <DependentUpon>vec2InputView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="defaultJson\defaultIconic.json" />
     <None Include="Properties\Settings.settings">

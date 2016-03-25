@@ -56,8 +56,10 @@ namespace StonehearthEditor
          switch(effectType)
          {
             case "cubemitter":
-               effectsBuilderPanel.Controls.Add(new EffectInputView());
-               effectsBuilderPanel.Controls.Add(new EffectInputView());
+               CubemitterInputView civ = new CubemitterInputView();
+               civ.ParticleFlowPanel.Controls.Add(new EffectInputView());
+               civ.EmissionFlowPanel.Controls.Add(new EffectInputView());
+               effectsBuilderPanel.Controls.Add(civ);
                break;
             default:
                // do nothing
