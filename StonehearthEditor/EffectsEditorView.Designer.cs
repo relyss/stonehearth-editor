@@ -46,6 +46,7 @@
          this.cloneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.effectsEditorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
          this.saveEffectsFileDialog = new System.Windows.Forms.SaveFileDialog();
+         this.helpButton = new System.Windows.Forms.Button();
          ((System.ComponentModel.ISupportInitialize)(this.effectsSplitContainer)).BeginInit();
          this.effectsSplitContainer.Panel1.SuspendLayout();
          this.effectsSplitContainer.Panel2.SuspendLayout();
@@ -232,10 +233,23 @@
          this.saveEffectsFileDialog.Filter = "JSON Files|*.json|Lua Files|*.lua";
          this.saveEffectsFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveEffectsFileDialog_FileOk);
          // 
+         // helpButton
+         // 
+         this.helpButton.BackColor = System.Drawing.SystemColors.AppWorkspace;
+         this.helpButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.helpButton.Location = new System.Drawing.Point(697, 0);
+         this.helpButton.Name = "helpButton";
+         this.helpButton.Size = new System.Drawing.Size(46, 25);
+         this.helpButton.TabIndex = 3;
+         this.helpButton.Text = "Help";
+         this.helpButton.UseVisualStyleBackColor = false;
+         this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
+         // 
          // EffectsEditorView
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.Controls.Add(this.helpButton);
          this.Controls.Add(this.effectsSplitContainer);
          this.Controls.Add(this.effectsToolStrip);
          this.Name = "EffectsEditorView";
@@ -277,5 +291,6 @@
       private System.Windows.Forms.ToolStripMenuItem cloneToolStripMenuItem;
       private System.Windows.Forms.ContextMenuStrip effectsEditorContextMenuStrip;
       private System.Windows.Forms.SaveFileDialog saveEffectsFileDialog;
+      private System.Windows.Forms.Button helpButton;
    }
 }

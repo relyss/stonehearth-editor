@@ -15,6 +15,7 @@ namespace StonehearthEditor
    {
       private Dictionary<string, FileData[]> mFileDataMap = new Dictionary<string, FileData[]>();
       private TreeNode mSelectedNode = null;
+      private string mNewFilePath = null;
       public EffectsEditorView()
       {
          InitializeComponent();
@@ -28,13 +29,53 @@ namespace StonehearthEditor
          ModuleDataManager.GetInstance().LoadCubemittersList(cubemittersTreeView);
       }
 
+      private IEnumerable<TreeNode> GetAllNodes(TreeView treeView)
+      {
+         Stack<TreeNode> toProcess = new Stack<TreeNode>();
+         foreach (TreeNode node in treeView.Nodes)
+         {
+            toProcess.Push(node);
+         }
+
+         while (toProcess.Count > 0)
+         {
+            TreeNode node = toProcess.Pop();
+            yield return node;
+            foreach (TreeNode child in node.Nodes)
+            {
+               toProcess.Push(child);
+            }
+         }
+      }
+
       public void Reload()
       {
-         filePreviewTabs.TabPages.Clear();
+         //filePreviewTabs.TabPages.Clear();
          effectsEditorTreeView.Nodes.Clear();
          cubemittersTreeView.Nodes.Clear();
          ModuleDataManager.GetInstance().LoadEffectsList(effectsEditorTreeView);
          ModuleDataManager.GetInstance().LoadCubemittersList(cubemittersTreeView);
+
+         TreeView treeView = GetTreeView(treeViewTabControl.SelectedIndex);
+         // If we are making a new file, select it in the treeview
+         if (mNewFilePath != null)
+         {
+            TreeNode[] matchingNodes = GetAllNodes(treeView)
+                                               .Where(r => r.Tag != null && r.Tag.ToString() == mNewFilePath)
+                                               .ToArray();
+            if (matchingNodes.Length > 0)
+            {
+               treeView.SelectedNode = matchingNodes.First();
+               mSelectedNode = treeView.SelectedNode;
+               mNewFilePath = null;
+            }
+         }
+         else if(mSelectedNode != null)
+         {
+            treeView.SelectedNode = mSelectedNode;
+         }
+
+
       }
 
       private void effectsOpenFileButton_Click(object sender, EventArgs e)
@@ -234,6 +275,7 @@ namespace StonehearthEditor
          private EffectsEditorView mViewer;
          private CloneObjectParameters mParameters;
          public HashSet<string> SavedUnwantedItems;
+         private string newFilePath;
          public PreviewCloneFileCallback(EffectsEditorView viewer, FileData fileData, CloneObjectParameters parameters)
          {
             mViewer = viewer;
@@ -251,6 +293,8 @@ namespace StonehearthEditor
          {
             if (ModuleDataManager.GetInstance().ExecuteClone(mFileData, mParameters, unwantedItems))
             {
+               newFilePath = mParameters.TransformParameter(mFileData.Path);
+               mViewer.SetNewFilePath(newFilePath);
                mViewer.Reload();
             }
             return true;
@@ -260,6 +304,11 @@ namespace StonehearthEditor
          {
             return SavedUnwantedItems;
          }
+      }
+
+      private void SetNewFilePath(string newFilePath)
+      {
+         mNewFilePath = newFilePath;
       }
 
       private void newFileButton_Click(object sender, EventArgs e)
@@ -287,7 +336,14 @@ namespace StonehearthEditor
          {
             wr.Write("{\n\n}");
          }
+         mNewFilePath = JsonHelper.NormalizeSystemPath(directory);
          Reload();
+      }
+
+      private void helpButton_Click(object sender, EventArgs e)
+      {
+         MessageBox.Show("Info: Right click an effect in the list to clone an effect. \n" +
+                         "Warning: Cloning aliases not yet supported. \n");
       }
    }
 }
