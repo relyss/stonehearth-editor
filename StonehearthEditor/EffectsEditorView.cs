@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace StonehearthEditor
    public partial class EffectsEditorView : UserControl
    {
       private Dictionary<string, FileData[]> mFileDataMap = new Dictionary<string, FileData[]>();
+      private TreeNode mSelectedNode = null;
       public EffectsEditorView()
       {
          InitializeComponent();
@@ -118,12 +120,14 @@ namespace StonehearthEditor
       private void effectsEditorTreeView_MouseClick(object sender, MouseEventArgs e)
       {
          effectsEditorTreeView.SelectedNode = effectsEditorTreeView.GetNodeAt(e.X, e.Y);
+         mSelectedNode = effectsEditorTreeView.SelectedNode;
          CheckShowContextMenu(effectsEditorTreeView, e);
       }
 
       private void cubemittersTreeView_MouseClick(object sender, MouseEventArgs e)
       {
          cubemittersTreeView.SelectedNode = cubemittersTreeView.GetNodeAt(e.X, e.Y);
+         mSelectedNode = cubemittersTreeView.SelectedNode;
          CheckShowContextMenu(cubemittersTreeView, e);
       }
 
@@ -165,12 +169,20 @@ namespace StonehearthEditor
          TreeNode selectedNode = treeView.SelectedNode;
          string filePath = selectedNode.Tag != null ? selectedNode.Tag.ToString() : null;
 
+         if (filePath == null)
+         {
+            MessageBox.Show("Invalid effect file!");
+            return;
+         }
+
          FileData selectedFileData = GetFileDataFromPath(filePath).First<FileData>();
          CloneEffectFileCallback callback = new CloneEffectFileCallback(this, selectedFileData);
          CloneDialog dialog = new CloneDialog(selectedFileData.FileName, selectedFileData.GetNameForCloning());
          dialog.SetCallback(callback);
          dialog.ShowDialog();
       }
+
+      // TODO: Refactor dialog/callback code so this isn't copy pasted from manifest view classes
 
       private class CloneEffectFileCallback : CloneDialog.IDialogCallback
       {
@@ -248,6 +260,34 @@ namespace StonehearthEditor
          {
             return SavedUnwantedItems;
          }
+      }
+
+      private void newFileButton_Click(object sender, EventArgs e)
+      {
+         if (mSelectedNode != null)
+         {
+            string path = mSelectedNode.Tag != null ? JsonHelper.NormalizeSystemPath(mSelectedNode.Tag.ToString()) : null;
+            if (path != null)
+            {
+                  saveEffectsFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(path);
+            }
+         }
+         else
+         {
+            saveEffectsFileDialog.InitialDirectory = System.IO.Path.GetFullPath(ModuleDataManager.GetInstance().ModsDirectoryPath);
+         }
+         saveEffectsFileDialog.ShowDialog();
+         saveEffectsFileDialog.RestoreDirectory = true;
+      }
+
+      private void saveEffectsFileDialog_FileOk(object sender, CancelEventArgs e)
+      {
+         string directory = System.IO.Path.GetFullPath(saveEffectsFileDialog.FileName);
+         using (StreamWriter wr = new StreamWriter(directory, false, new UTF8Encoding(false)))
+         {
+            wr.Write("{\n\n}");
+         }
+         Reload();
       }
    }
 }

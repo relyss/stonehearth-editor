@@ -260,6 +260,9 @@
     <Content Include="scripts\generate_loc_keys.py" />
     <Content Include="scripts\json_selector.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dialogSubClasses\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
