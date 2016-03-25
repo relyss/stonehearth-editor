@@ -193,6 +193,7 @@ namespace StonehearthEditor
             filePreviewTabs.TabPages.Clear();
          }
          cubemittersTreeView.Focus();
+         effectsBuilderView.UpdateBuilder(cubemittersTreeView, filePreviewTabs, "cubemitter");
       }
 
       private TreeView GetTreeView(int index)

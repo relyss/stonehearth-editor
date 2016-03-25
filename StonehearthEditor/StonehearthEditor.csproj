@@ -90,6 +90,12 @@
       <DependentUpon>CloneDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="CloneObjectParameters.cs" />
+    <Compile Include="EffectsBuilderView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EffectsBuilderView.Designer.cs">
+      <DependentUpon>EffectsBuilderView.cs</DependentUpon>
+    </Compile>
     <Compile Include="EffectsEditorView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -165,12 +171,21 @@
       <DependentUpon>FilePreview.cs</DependentUpon>
     </Compile>
     <Compile Include="QubicleFileData.cs" />
+    <Compile Include="subViews\EffectInputView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="subViews\EffectInputView.Designer.cs">
+      <DependentUpon>EffectInputView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThumbnailCache.cs" />
     <EmbeddedResource Include="AliasSelectionDialog.resx">
       <DependentUpon>AliasSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CloneDialog.resx">
       <DependentUpon>CloneDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EffectsBuilderView.resx">
+      <DependentUpon>EffectsBuilderView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EffectsEditorView.resx">
       <DependentUpon>EffectsEditorView.cs</DependentUpon>
@@ -213,6 +228,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="subViews\EffectInputView.resx">
+      <DependentUpon>EffectInputView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="defaultJson\defaultIconic.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -260,9 +278,7 @@
     <Content Include="scripts\generate_loc_keys.py" />
     <Content Include="scripts\json_selector.py" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="dialogSubClasses\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

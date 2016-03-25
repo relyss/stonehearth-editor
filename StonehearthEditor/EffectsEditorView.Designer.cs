@@ -38,7 +38,6 @@
          this.effectsEditorTreeView = new System.Windows.Forms.TreeView();
          this.effectsSplitContainer2 = new System.Windows.Forms.SplitContainer();
          this.filePreviewTabs = new System.Windows.Forms.TabControl();
-         this.editOptionsListView = new System.Windows.Forms.ListView();
          this.effectsToolStrip = new System.Windows.Forms.ToolStrip();
          this.newFileButton = new System.Windows.Forms.ToolStripButton();
          this.effectsOpenFileButton = new System.Windows.Forms.ToolStripButton();
@@ -47,6 +46,7 @@
          this.effectsEditorContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
          this.saveEffectsFileDialog = new System.Windows.Forms.SaveFileDialog();
          this.helpButton = new System.Windows.Forms.Button();
+         this.effectsBuilderView = new StonehearthEditor.EffectsBuilderView();
          ((System.ComponentModel.ISupportInitialize)(this.effectsSplitContainer)).BeginInit();
          this.effectsSplitContainer.Panel1.SuspendLayout();
          this.effectsSplitContainer.Panel2.SuspendLayout();
@@ -149,7 +149,7 @@
          // 
          // effectsSplitContainer2.Panel2
          // 
-         this.effectsSplitContainer2.Panel2.Controls.Add(this.editOptionsListView);
+         this.effectsSplitContainer2.Panel2.Controls.Add(this.effectsBuilderView);
          this.effectsSplitContainer2.Size = new System.Drawing.Size(534, 548);
          this.effectsSplitContainer2.SplitterDistance = 325;
          this.effectsSplitContainer2.TabIndex = 0;
@@ -162,15 +162,6 @@
          this.filePreviewTabs.SelectedIndex = 0;
          this.filePreviewTabs.Size = new System.Drawing.Size(325, 548);
          this.filePreviewTabs.TabIndex = 3;
-         // 
-         // editOptionsListView
-         // 
-         this.editOptionsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.editOptionsListView.Location = new System.Drawing.Point(0, 0);
-         this.editOptionsListView.Name = "editOptionsListView";
-         this.editOptionsListView.Size = new System.Drawing.Size(205, 548);
-         this.editOptionsListView.TabIndex = 0;
-         this.editOptionsListView.UseCompatibleStateImageBehavior = false;
          // 
          // effectsToolStrip
          // 
@@ -245,6 +236,14 @@
          this.helpButton.UseVisualStyleBackColor = false;
          this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
          // 
+         // effectsBuilderView
+         // 
+         this.effectsBuilderView.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.effectsBuilderView.Location = new System.Drawing.Point(0, 0);
+         this.effectsBuilderView.Name = "effectsBuilderView";
+         this.effectsBuilderView.Size = new System.Drawing.Size(205, 548);
+         this.effectsBuilderView.TabIndex = 1;
+         // 
          // EffectsEditorView
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -277,7 +276,6 @@
 
       private System.Windows.Forms.SplitContainer effectsSplitContainer;
       private System.Windows.Forms.SplitContainer effectsSplitContainer2;
-      private System.Windows.Forms.ListView editOptionsListView;
       private System.Windows.Forms.TabControl filePreviewTabs;
       private System.Windows.Forms.ToolStrip effectsToolStrip;
       private System.Windows.Forms.ToolStripButton newFileButton;
@@ -292,5 +290,6 @@
       private System.Windows.Forms.ContextMenuStrip effectsEditorContextMenuStrip;
       private System.Windows.Forms.SaveFileDialog saveEffectsFileDialog;
       private System.Windows.Forms.Button helpButton;
+      private EffectsBuilderView effectsBuilderView;
    }
 }
