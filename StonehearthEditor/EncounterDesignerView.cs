@@ -29,6 +29,8 @@ namespace StonehearthEditor
 
       public void Initialize()
       {
+         new ModuleDataManager(MainForm.kModsDirectoryPath);
+         ModuleDataManager.GetInstance().Load();
          UpdateSelectedNodeInfo(null);
          graphViewer.Graph = null;
          new GameMasterDataManager();

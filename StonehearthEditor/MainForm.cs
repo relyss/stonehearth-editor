@@ -22,6 +22,8 @@ namespace StonehearthEditor
 
       private NetWorthVisualizer mNetWorthVisualizer;
 
+      private HashSet<TabPage> loadedTabs = new HashSet<TabPage>();
+
       public MainForm(string path)
       {
          path = path.Trim();
@@ -35,9 +37,9 @@ namespace StonehearthEditor
          {
             chooseModDirectory();
          }
-         LoadModFiles();
-         int initialTab = (int) Properties.Settings.Default["InitialTab"];
+         int initialTab = (int)Properties.Settings.Default["InitialTab"];
          tabControl.SelectedIndex = initialTab;
+         EnsureTabLoaded(tabControl.SelectedTab);
 
          if (Properties.Settings.Default.MainFormSize != null)
          {
@@ -45,19 +47,39 @@ namespace StonehearthEditor
          }
       }
 
-      private void LoadModFiles()
+      private void EnsureTabLoaded(TabPage tab)
       {
-         manifestView.Initialize();
-         encounterDesignerView.Initialize();
-         entityBrowserView.Initialize();
-         effectsEditorView.Initialize();
+         if (loadedTabs.Contains(tab))
+         {
+            return;
+         }
+
+         loadedTabs.Add(tab);
+
+         if (tab == manifestTab)
+         {
+            manifestView.Initialize();
+         }
+         else if (tab == encounterTab)
+         {
+            encounterDesignerView.Initialize();
+         }
+         else if (tab == entityBrowserTab)
+         {
+            entityBrowserView.Initialize();
+         }
+         else if (tab == effectsEditorTab)
+         {
+            effectsEditorView.Initialize();
+         }
       }
 
       private void tabControl_Selected(object sender, TabControlEventArgs e)
       {
-         //e.TabPageIndex;
          Properties.Settings.Default["InitialTab"] = e.TabPageIndex;
          Properties.Settings.Default.Save();
+
+         EnsureTabLoaded(e.TabPage);
       }
 
       private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)

@@ -35,6 +35,7 @@
          this.valuesFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
          this.surfaceComboBox = new System.Windows.Forms.ComboBox();
          this.limitsTipLabel = new System.Windows.Forms.Label();
+         this.mainFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
          this.SuspendLayout();
          // 
          // typeLabel
@@ -51,7 +52,7 @@
          // 
          this.valuesLabel.AutoSize = true;
          this.valuesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.valuesLabel.Location = new System.Drawing.Point(3, 43);
+         this.valuesLabel.Location = new System.Drawing.Point(3, 38);
          this.valuesLabel.Name = "valuesLabel";
          this.valuesLabel.Size = new System.Drawing.Size(41, 13);
          this.valuesLabel.TabIndex = 1;
@@ -85,9 +86,9 @@
          this.valuesFlowPanel.BackColor = System.Drawing.SystemColors.Control;
          this.valuesFlowPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
          this.valuesFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-         this.valuesFlowPanel.Location = new System.Drawing.Point(50, 30);
+         this.valuesFlowPanel.Location = new System.Drawing.Point(50, 32);
          this.valuesFlowPanel.Name = "valuesFlowPanel";
-         this.valuesFlowPanel.Size = new System.Drawing.Size(190, 145);
+         this.valuesFlowPanel.Size = new System.Drawing.Size(190, 24);
          this.valuesFlowPanel.TabIndex = 6;
          // 
          // surfaceComboBox
@@ -111,12 +112,19 @@
          this.limitsTipLabel.Size = new System.Drawing.Size(0, 13);
          this.limitsTipLabel.TabIndex = 8;
          // 
+         // mainFlowPanel
+         // 
+         this.mainFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.mainFlowPanel.Location = new System.Drawing.Point(0, 0);
+         this.mainFlowPanel.Name = "mainFlowPanel";
+         this.mainFlowPanel.Size = new System.Drawing.Size(284, 66);
+         this.mainFlowPanel.TabIndex = 9;
+         // 
          // EffectInputView
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.BackColor = System.Drawing.SystemColors.ControlLight;
-         this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+         this.BackColor = System.Drawing.SystemColors.Window;
          this.Controls.Add(this.limitsTipLabel);
          this.Controls.Add(this.surfaceComboBox);
          this.Controls.Add(this.valuesFlowPanel);
@@ -124,8 +132,9 @@
          this.Controls.Add(this.addValueButton);
          this.Controls.Add(this.valuesLabel);
          this.Controls.Add(this.typeLabel);
+         this.Controls.Add(this.mainFlowPanel);
          this.Name = "EffectInputView";
-         this.Size = new System.Drawing.Size(284, 182);
+         this.Size = new System.Drawing.Size(284, 66);
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -140,5 +149,6 @@
       private System.Windows.Forms.FlowLayoutPanel valuesFlowPanel;
       private System.Windows.Forms.ComboBox surfaceComboBox;
       private System.Windows.Forms.Label limitsTipLabel;
+      private System.Windows.Forms.FlowLayoutPanel mainFlowPanel;
    }
 }

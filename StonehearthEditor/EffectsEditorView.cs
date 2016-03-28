@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StonehearthEditor.Effects;
 
 namespace StonehearthEditor
 {
@@ -182,7 +183,7 @@ namespace StonehearthEditor
 
       private void cubemittersTreeView_AfterSelect(object sender, TreeViewEventArgs e)
       {
-         Object fullPath = cubemittersTreeView.SelectedNode.Tag;
+         object fullPath = cubemittersTreeView.SelectedNode.Tag;
          if (fullPath != null)
          {
             LoadFilePreview(fullPath.ToString());
@@ -191,9 +192,13 @@ namespace StonehearthEditor
          {
             // If no file data found, just clear file preview
             filePreviewTabs.TabPages.Clear();
+            return;
          }
          cubemittersTreeView.Focus();
-         effectsBuilderView.UpdateBuilder(cubemittersTreeView, filePreviewTabs, "cubemitter");
+         var fileData = GetFileDataFromPath(fullPath.ToString())[0];
+         var json = ((JsonFileData)fileData).Json;
+         effectsBuilderView.ReloadEditor(json, EffectKinds.CubeEmitter);
+         //effectsBuilderView.UpdateBuilder(cubemittersTreeView, filePreviewTabs, "cubemitter");
       }
 
       private TreeView GetTreeView(int index)

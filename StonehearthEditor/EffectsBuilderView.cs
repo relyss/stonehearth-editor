@@ -8,47 +8,33 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StonehearthEditor.subViews;
+using Newtonsoft.Json.Linq;
+using StonehearthEditor.Effects;
+using StonehearthEditor.EffectsUI;
 
 namespace StonehearthEditor
 {
    public partial class EffectsBuilderView : UserControl
    {
-      abstract class Giver { }
-      sealed class FloatGiver : Giver
-      {
-         private float? min;
-         private float? max;
+      private Control editorUI;
 
-         public FloatGiver(string option)
-         {
-         }
-      }
-
-      // topic => parameter => param info
-      private readonly Dictionary<string, Dictionary<string, Giver>> particleOptions = new Dictionary<string, Dictionary<string, Giver>>
-      {
-         {
-            "speed", new Dictionary<string, Giver>
-            {
-               { "start", new FloatGiver("start") },
-               { "over_lifetime", new FloatGiver("over_lifetime") }
-            }
-         },
-         {
-            "lifetime", new Dictionary<string, Giver>
-            {
-               { "start", new FloatGiver("start") }
-            }
-         }
-      };
       public EffectsBuilderView()
       {
          InitializeComponent();
       }
 
-      public void Initialize()
+      public void ReloadEditor(JToken json, Property property)
       {
-         // initialize view variables
+         if (editorUI != null)
+         {
+            pnlEditor.Controls.Remove(editorUI);
+            editorUI.Dispose();
+            editorUI = null;
+         }
+
+         PropertyValue propertyValue = property.FromJson(json);
+         editorUI = EffectUICreator.CreateUI(property, propertyValue);
+         pnlEditor.Controls.Add(editorUI);
       }
 
       public void UpdateBuilder(TreeView treeView, TabControl filePreviewTabs, string effectType)

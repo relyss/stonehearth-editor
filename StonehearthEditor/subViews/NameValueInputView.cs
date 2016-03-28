@@ -16,5 +16,26 @@ namespace StonehearthEditor.subViews
       {
          InitializeComponent();
       }
+
+      public NameValueInputView(string name)
+      {
+         setName(nameLabel, name);
+      }
+
+      public string NameLabel
+      {
+         get { return nameLabel.Text; }
+         set { setName(nameLabel, value); }
+      }
+      public TextBox InputTextBox
+      {
+         get { return inputTextBox;  }
+      }
+
+      private void setName(Control control, string value)
+      {
+         control.Name = value;
+         control.Text = value;
+      }
    }
 }

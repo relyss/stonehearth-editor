@@ -35,14 +35,15 @@
          // nameLabel
          // 
          this.nameLabel.AutoSize = true;
-         this.nameLabel.Location = new System.Drawing.Point(3, 0);
+         this.nameLabel.Location = new System.Drawing.Point(3, 3);
          this.nameLabel.Name = "nameLabel";
-         this.nameLabel.Size = new System.Drawing.Size(0, 13);
+         this.nameLabel.Size = new System.Drawing.Size(33, 13);
          this.nameLabel.TabIndex = 0;
+         this.nameLabel.Text = "name";
          // 
          // inputTextBox
          // 
-         this.inputTextBox.Location = new System.Drawing.Point(44, -3);
+         this.inputTextBox.Location = new System.Drawing.Point(42, 0);
          this.inputTextBox.Name = "inputTextBox";
          this.inputTextBox.Size = new System.Drawing.Size(119, 20);
          this.inputTextBox.TabIndex = 1;
@@ -54,7 +55,7 @@
          this.Controls.Add(this.inputTextBox);
          this.Controls.Add(this.nameLabel);
          this.Name = "NameValueInputView";
-         this.Size = new System.Drawing.Size(172, 25);
+         this.Size = new System.Drawing.Size(165, 22);
          this.ResumeLayout(false);
          this.PerformLayout();
 

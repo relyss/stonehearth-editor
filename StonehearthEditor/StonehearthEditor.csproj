@@ -102,6 +102,20 @@
     <Compile Include="EffectsEditorView.Designer.cs">
       <DependentUpon>EffectsEditorView.cs</DependentUpon>
     </Compile>
+    <Compile Include="EffectsUI\ComplexUI.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EffectsUI\EffectUICreator.cs" />
+    <Compile Include="EffectsUI\TextboxUI.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Effects\Complex.cs" />
+    <Compile Include="Effects\EffectKinds.cs" />
+    <Compile Include="Effects\Int.cs" />
+    <Compile Include="Effects\Parameter.cs" />
+    <Compile Include="Effects\Property.cs" />
+    <Compile Include="Effects\PropertyValue.cs" />
+    <Compile Include="Effects\String.cs" />
     <Compile Include="EncounterDesignerView.cs">
       <SubType>UserControl</SubType>
     </Compile>

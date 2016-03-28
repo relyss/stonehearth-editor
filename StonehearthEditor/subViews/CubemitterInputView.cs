@@ -24,6 +24,5 @@ namespace StonehearthEditor.subViews
       {
          get { return emissionFlowLayoutPanel; }
       }
-
    }
 }
