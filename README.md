@@ -9,4 +9,5 @@ relyss's wishlist:
 * nested mixins support in Encounter Designer
 * mac support
 * effects visualization
+* syntax highlighting for Lua scripts
 * and more
